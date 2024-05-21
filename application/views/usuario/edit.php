@@ -96,7 +96,7 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
 
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">Clientes</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Usuários</a></li>
                     <li class="breadcrumb-item active">Adicionar Novo</li>
                 </ol>
             </div>
@@ -135,7 +135,7 @@
     </div>
     <!-- end row -->
     <div class="row">
-        <div class="col-6"></div>
+        <div class="col-3"></div>
         <div class="col-6">
             <div class="text-right mb-3">
                 <button type="button" onclick="validar()" class="btn  w-sm btn-success waves-effect waves-light">PROSSEGUIR</button>
@@ -145,200 +145,19 @@
     <!-- end row -->
 
 </form>
-
-
-
-
-
-
-
-
-
-<!-- Botão para acionar modal -->
-<button type="button" class="btn btn-primary hidden" data-toggle="modal" data-target="#modalExemplo" id="successModal" style="display: none !important">
-    Abrir modal de demonstraçãoaadsfad
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 style="text-align: center; text-transform: uppercase;">Usuário <?php $nome = explode(" ", $this->session->flashdata('nome'));
-                                                                                    echo $nome[0];  ?> adicionado com sucesso!</h2>
-
-            </div>
-            <div class="modal-body">
-                <div class="text-center">
-                    <img src="https://img.pngio.com/check-complete-done-green-success-valid-icon-valid-png-512_512.png" width="200">
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-
-    <?php if ($this->input->get('warning') == 'success') {
-        echo "<script>window.onload = function() {
-$('#successModal').click();
-}</script>";
-    } ?>
-
-
-
-    <script type="text/javascript">
-        function validar() {
-            var pass = document.getElementById('password').value;
-            var cpass = document.getElementById('conf_password').value;
-            if (pass == "" && cpass == "") {
-                document.getElementById('formulario').submit();
-            } else if (pass == cpass) {
-                document.getElementById('formulario').submit();
-            } else {
-                document.getElementById('password').value = "";
-                document.getElementById('conf_password').value = "";
-                document.getElementById('password').focus();
-                alert('As senhas não coincidem!');
-            }
+<script type="text/javascript">
+    function validar() {
+        var pass = document.getElementById('password').value;
+        var cpass = document.getElementById('conf_password').value;
+        if (pass == "" && cpass == "") {
+            document.getElementById('formulario').submit();
+        } else if (pass == cpass) {
+            document.getElementById('formulario').submit();
+        } else {
+            document.getElementById('password').value = "";
+            document.getElementById('conf_password').value = "";
+            document.getElementById('password').focus();
+            alert('As senhas não coincidem!');
         }
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    document.getElementById('blah').style.display = 'block'
-                    $('#blah').attr('src', e.target.result);
-
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        window.onload = function() {
-            $("#photo").change(function() {
-                readURL(this);
-            });
-        }
-
-
-
-        function limpa_formulário_cep() {
-            //Limpa valores do formulário de cep.
-            document.getElementById('rua').value = ("");
-            document.getElementById('bairro').value = ("");
-            document.getElementById('cidade').value = ("");
-            document.getElementById('uf').value = ("");
-
-        }
-
-        function meu_callback(conteudo) {
-            if (!("erro" in conteudo)) {
-                //Atualiza os campos com os valores.
-                document.getElementById('rua').value = (conteudo.logradouro);
-                document.getElementById('bairro').value = (conteudo.bairro);
-                document.getElementById('cidade').value = (conteudo.localidade);
-                document.getElementById('uf').value = (conteudo.uf);
-
-            } //end if.
-            else {
-                //CEP não Encontrado.
-                limpa_formulário_cep();
-                alert("CEP inválido");
-            }
-        }
-
-        function pesquisacep(valor) {
-
-            //Nova variável "cep" somente com dígitos.
-            var cep = valor.replace(/\D/g, '');
-
-            //Verifica se campo cep possui valor informado.
-            if (cep != "") {
-
-                //Expressão regular para validar o CEP.
-                var validacep = /^[0-9]{8}$/;
-
-                //Valida o formato do CEP.
-                if (validacep.test(cep)) {
-
-                    //Preenche os campos com "..." enquanto consulta webservice.
-                    document.getElementById('rua').value = "...";
-                    document.getElementById('bairro').value = "...";
-                    document.getElementById('cidade').value = "...";
-                    document.getElementById('uf').value = "...";
-
-
-                    //Cria um elemento javascript.
-                    var script = document.createElement('script');
-
-                    //Sincroniza com o callback.
-                    script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
-
-                    //Insere script no documento e carrega o conteúdo.
-                    document.body.appendChild(script);
-
-                } //end if.
-                else {
-                    //cep é inválido.
-                    limpa_formulário_cep();
-                    alert("Formato de CEP inválido.");
-                }
-            } //end if.
-            else {
-                //cep sem valor, limpa formulário.
-                limpa_formulário_cep();
-            }
-        };
-    </script>
-
-
-    <script>
-        function readFile(input) {
-            $("#status").html('Processing...');
-            counter = input.files.length;
-            for (x = 0; x < counter; x++) {
-                if (input.files && input.files[x]) {
-
-                    var reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        document.getElementById('photos').innerHTML = '<img src="' + e.target.result + '" style="width:100%; height:100%; border-radius:10px;">';
-
-                        axios.post('<?php echo base_url("produto/update_imagem/" . $this->uri->segment(3)); ?>', {
-                            imagem: e.target.result
-                        }).then(function(response) {
-                            console.log('Foto principal alterada!');
-                        });
-
-
-
-
-                        document.getElementById('imgatual').style.display = 'none';
-                    };
-
-                    reader.readAsDataURL(input.files[x]);
-                }
-            }
-            if (counter == x) {
-                $("#status").html('');
-            }
-        }
-
-
-        // Span
-        var span = document.getElementsByClassName('upload-path');
-        // Button
-        var uploader = document.getElementsByName('upload');
-        // On change
-        for (item in uploader) {
-            // Detect changes
-            uploader[item].onchange = function() {
-                // Echo filename in span
-                span[0].innerHTML = this.files[0].name;
-            }
-        }
-    </script>
+    }
+</script>

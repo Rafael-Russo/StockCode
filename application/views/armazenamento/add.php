@@ -96,11 +96,11 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
 
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">Ferramentas</a></li>
-                    <li class="breadcrumb-item active">Adicionar Nova</li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Armazenamentos</a></li>
+                    <li class="breadcrumb-item active">Adicionar Novo</li>
                 </ol>
             </div>
-            <p class="page-title font-weight-bold text-uppercase">Adicionar Nova Ferramenta</p>
+            <p class="page-title font-weight-bold text-uppercase">Adicionar Novo Armazém</p>
         </div>
     </div>
 </div>
@@ -117,16 +117,8 @@
                     <input type="text" name="nome" value="" class="form-control" id="nome" />
                 </div>
                 <div class="form-group mb-3">
-                    <label>Calibrado? <span class="text-danger">*</span></label>
-                    <input type="text" name="calibragem" value="" class="form-control" id="calibragem" />
-                </div>
-                <div class="form-group mb-3">
                     <label>QR Code <span class="text-danger">*</span></label>
                     <input type="text" name="qrcode" value="" class="form-control" id="qrcode" />
-                </div>
-                <div class="form-group mb-3">
-                    <label>Armazenamento <span class="text-danger">*</span></label>
-                    <input type="text" name="armazenamento" value="" class="form-control" id="armazenamento" />
                 </div>
             </div> <!-- end card-box -->
         </div> <!-- end col -->

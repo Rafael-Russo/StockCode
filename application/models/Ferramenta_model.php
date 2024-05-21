@@ -1,6 +1,6 @@
 <?php
  
-class ferramenta_model extends CI_Model
+class Ferramenta_model extends CI_Model
 {
     function __construct()
     {
@@ -38,7 +38,7 @@ class ferramenta_model extends CI_Model
      */
     function update_ferramenta($ferramenta_id,$params)
     {
-        $this->db->where('ferramenta_id',$ferramenta_id);
+        $this->db->where('id',$ferramenta_id);
         return $this->db->update('ferramenta',$params);
     }
     
@@ -47,6 +47,6 @@ class ferramenta_model extends CI_Model
      */
     function delete_ferramenta($ferramenta_id)
     {
-        return $this->db->delete('ferramenta',array('ferramenta_id'=>$ferramenta_id));
+        return $this->db->delete('ferramenta',array('id'=>$ferramenta_id));
     }
 }

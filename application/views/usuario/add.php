@@ -97,7 +97,7 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
 
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">Usuarios</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Usuários</a></li>
                     <li class="breadcrumb-item active">Adicionar Novo</li>
                 </ol>
             </div>
@@ -115,7 +115,7 @@
                 <p class="text-uppercase bg-light p-2 mt-0 mb-3 font-weight-bold">Informações</p>
                 <div class="form-group mb-3">
                     <label>Nome <span class="text-danger">*</span></label>
-                    <input type="text" name="nome" value="<?php echo $this->input->post('nome'); ?>" class="form-control" id="nome" />
+                    <input type="text" name="nome" value="" class="form-control" id="nome" />
                 </div>
                 <div class="form-group mb-3">
                     <label>E-mail <span class="text-danger">*</span></label>

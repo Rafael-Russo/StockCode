@@ -65,7 +65,7 @@ class Usuario extends CI_Controller
 
     function add()
     {
-        if ($this->input->post('nome')) {
+        if ($this->input->post()) {
             $email = $this->input->post('email');
             if ($this->Usuario_model->get_usuario_by_email($email)) {
                 $this->session->set_flashdata('error', 'Este email já está cadastrado.');
