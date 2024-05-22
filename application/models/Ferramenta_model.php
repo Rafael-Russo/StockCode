@@ -28,8 +28,12 @@ class Ferramenta_model extends CI_Model
      */
     function get_all_ferramentas()
     {
+        $this->db->select('f.*, a.nome as armazenamento_nome');
+        $this->db->from('ferramenta f');
+        $this->db->join('armazenamento a', 'f.armazenamento = a.id', 'left');
         $this->db->order_by('id', 'desc');
-        return $this->db->get('ferramenta')->result_array();
+        $query = $this->db->get();
+        return $query->result_array();
     }
         
     /*

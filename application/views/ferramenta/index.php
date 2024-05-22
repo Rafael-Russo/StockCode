@@ -21,8 +21,8 @@
                             <div class="form-group mr-2">
                                 <select id="demo-foo-filter-status" class="custom-select ">
                                     <option value="">Mostrar Todos</option>
-                                    <option value="CALIBRADOS">Calibrados</option>
-                                    <option value="DESCALIBRADOS">Descalibrados</option>
+                                    <option value="CALIBRADO">Calibrados</option>
+                                    <option value="DESCALIBRADO">Descalibrados</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -35,6 +35,7 @@
                     <table id="demo-foo-filtering" class="table table-bordered toggle-circle mb-0" data-page-size="7">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Nome</th>
                                 <th>QR Code</th>
                                 <th>Calibragem</th>
@@ -45,13 +46,15 @@
                         <tbody>
                             <?php foreach ($ferramentas as $f) { ?>
                                 <tr>
+                                    <td style="text-transform: uppercase"><?php echo $f['id']; ?></td>
                                     <td style="text-transform: uppercase"><?php echo $f['nome']; ?></td>
                                     <td><img src="<?php echo base_url($f['qr_code']); ?>" alt="" height="40"></td>
                                     <td>
                                         <?php echo ($f['calibragem'] == 1) ? "<span class='badge label-table badge-success'  style='padding-top:5px;'>CALIBRADO</span>" : "<span class='badge label-table badge-danger' style='padding-top:5px;'>DESCALIBRADO</span>"; ?>
                                     </td>
-                                    <td><?php echo !empty($f['armazenamento']) ? $f['armazenamento'] : 'Nenhum'; ?></td>
+                                    <td><?php echo !empty($f['armazenamento_nome']) ? $f['armazenamento_nome'] : 'Nenhum'; ?></td>
                                     <td>
+                                        <a href="<?php echo site_url('ferramenta/view/' . $f['id']); ?>" class="btn btn-warning btn-xs"><i class="fa fa-solid fa-eye"></i></a>
                                         <a href="<?php echo site_url('ferramenta/editar/' . $f['id']); ?>" class="btn btn-info btn-xs"><i class="fa fa-pen"></i></a>
                                         <a href="<?php echo site_url('ferramenta/remove/' . $f['id']); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
                                     </td>

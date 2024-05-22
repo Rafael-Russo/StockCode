@@ -52,6 +52,7 @@ INSERT INTO `armazenamento` (`id`, `nome`, `qr_code`) VALUES
 CREATE TABLE `ferramenta` (
   `id` int(10) UNSIGNED NOT NULL,
   `nome` varchar(360) NOT NULL,
+  `img` varchar(360) DEFAULT NULL,
   `calibragem` int(1) NOT NULL DEFAULT 0 COMMENT '0 = descalibrado,\r\n1 = calibrado',
   `qr_code` varchar(360) DEFAULT NULL,
   `armazenamento` int(11) DEFAULT NULL
@@ -61,9 +62,11 @@ CREATE TABLE `ferramenta` (
 -- Extraindo dados da tabela `ferramenta`
 --
 
-INSERT INTO `ferramenta` (`id`, `nome`, `calibragem`, `qr_code`, `armazenamento`) VALUES
-(1, 'FERRAMENTA TESTE', 0, '/assets/qrcodes/ferramentas/1.png', NULL),
-(2, 'teste edit', 1, '/assets/qrcodes/ferramentas/1.png', 2);
+INSERT INTO `ferramenta` (`id`, `nome`, `img`, `calibragem`, `qr_code`, `armazenamento`) VALUES
+(1, 'FERRAMENTA TESTE', '/assets/qrcodes/ferramentas/1.png', 0, '/assets/qrcodes/ferramentas/1.png', NULL),
+(2, 'teste edit', '/assets/qrcodes/ferramentas/1.png', 1, '/assets/qrcodes/ferramentas/1.png', 2),
+(8, 'teste upload', '/assets/qrcodes/ferramentas/1.png', 1, '/assets/qrcodes/ferramentas/1.png', 2),
+(9, 'teste qrcode', '/assets/images/ferramentas/bbfca487292a63aa277ac90010663bf0.png', 1, './assets/qrcodes/ferramentas/9.png', 0);
 
 -- --------------------------------------------------------
 
@@ -83,7 +86,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`) VALUES
-(2, 'Rafael (TESTE)', 'teste@teste.com', 'aa1bf4646de67fd9086cf6c79007026c'),
+(2, '(TESTE)', 'teste@teste.com', 'aa1bf4646de67fd9086cf6c79007026c'),
 (5, 'teste', 'teste2@teste.com', 'd41d8cd98f00b204e9800998ecf8427e');
 
 --
@@ -122,7 +125,7 @@ ALTER TABLE `armazenamento`
 -- AUTO_INCREMENT de tabela `ferramenta`
 --
 ALTER TABLE `ferramenta`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
