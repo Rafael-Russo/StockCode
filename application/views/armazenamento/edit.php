@@ -108,7 +108,6 @@
 
 <form method="POST" action="" enctype="multipart/form-data" id="formulario">
     <div class="row">
-        <div class="col-lg-3"></div>
         <div class="col-lg-6">
             <div class="card-box">
                 <p class="text-uppercase bg-light p-2 mt-0 mb-3 font-weight-bold">Informações</p>
@@ -120,6 +119,43 @@
                     <label>QR Code <span class="text-danger">*</span></label>
                     <input type="text" name="qrcode" value="<?php echo $armazenamento['qr_code']; ?>" class="form-control" id="qrcode" />
                 </div>
+            </div> <!-- end card-box -->
+        </div> <!-- end col -->
+        <div class="col-lg-6">
+            <div class="card-box">
+                <p class="text-uppercase bg-light p-2 mt-0 mb-3 font-weight-bold">Ferramentas</p>
+                <?php
+                if (!$ferramentas) {
+                ?>
+                    <p class="text-uppercase p-2 mt-0 mb-3">Nenhuma Ferramenta Disponível</p>
+                <?php
+                } else {
+                ?>
+                    <div class="table-responsive">
+                        <table id="demo-foo-filtering" class="table table-bordered toggle-circle mb-0" data-page-size="7">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Calibragem</th>
+                                    <th>QR Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($ferramentas as $f) { ?>
+                                    <tr class="clickable-row" data-href="<?php echo site_url('ferramenta/editar/' . $f['id']); ?>">
+                                        <td style="text-transform: uppercase"><?php echo $f['nome']; ?></td>
+                                        <td>
+                                            <?php echo ($f['calibragem'] == 1) ? "<span class='badge label-table badge-success'  style='padding-top:5px;'>CALIBRADO</span>" : "<span class='badge label-table badge-danger' style='padding-top:5px;'>DESCALIBRADO</span>"; ?>
+                                        </td>
+                                        <td><img src="<?php echo base_url($f['qr_code']); ?>" alt="" height="40"></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div> <!-- end table-responsive -->
+                <?php
+                }
+                ?>
             </div> <!-- end card-box -->
         </div> <!-- end col -->
     </div>
@@ -136,6 +172,15 @@
 
 </form>
 <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const rows = document.querySelectorAll('.clickable-row');
+        rows.forEach(row => {
+            row.addEventListener('click', () => {
+                window.location.href = row.getAttribute('data-href');
+            });
+        });
+    });
+
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();

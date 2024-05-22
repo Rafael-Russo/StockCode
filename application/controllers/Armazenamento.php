@@ -40,6 +40,8 @@ class Armazenamento extends CI_Controller
 
     function editar($armazenamento_id)
     {
+        $this->load->model('Ferramenta_model');
+
         if ($this->input->post()) {
             $params = array(
                 'nome' => $this->input->post('nome'),
@@ -52,6 +54,7 @@ class Armazenamento extends CI_Controller
         }
 
         $data['armazenamento'] = $this->Armazenamento_model->get_armazenamento($armazenamento_id);
+        $data['ferramentas'] = $this->Ferramenta_model->get_ferramenta_by_armazenamento($armazenamento_id);
 
         $data['_view'] = 'armazenamento/edit';
         $this->load->view('layouts/main', $data);

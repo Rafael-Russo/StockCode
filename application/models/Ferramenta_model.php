@@ -14,6 +14,14 @@ class Ferramenta_model extends CI_Model
     {
         return $this->db->get_where('ferramenta',array('id'=>$ferramenta_id))->row_array();
     }
+
+    /*
+     * Get ferramenta by armazenamento_id
+     */
+    function get_ferramenta_by_armazenamento($armazenamento_id)
+    {
+        return $this->db->get_where('ferramenta',array('armazenamento'=>$armazenamento_id))->result_array();
+    }
         
     /*
      * Get all ferramenta
