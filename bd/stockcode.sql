@@ -41,7 +41,8 @@ CREATE TABLE `armazenamento` (
 --
 
 INSERT INTO `armazenamento` (`id`, `nome`, `qr_code`) VALUES
-(2, 'teste', '/assets/qrcodes/ferramentas/1.png');
+(5, 'teste', './assets/qrcodes/armazens/5.png'),
+(6, 'teste 2 edit', './assets/qrcodes/armazens/6.png');
 
 -- --------------------------------------------------------
 
@@ -63,10 +64,34 @@ CREATE TABLE `ferramenta` (
 --
 
 INSERT INTO `ferramenta` (`id`, `nome`, `img`, `calibragem`, `qr_code`, `armazenamento`) VALUES
-(1, 'FERRAMENTA TESTE', '/assets/qrcodes/ferramentas/1.png', 0, '/assets/qrcodes/ferramentas/1.png', NULL),
-(2, 'teste edit', '/assets/qrcodes/ferramentas/1.png', 1, '/assets/qrcodes/ferramentas/1.png', 2),
-(8, 'teste upload', '/assets/qrcodes/ferramentas/1.png', 1, '/assets/qrcodes/ferramentas/1.png', 2),
-(9, 'teste qrcode', '/assets/images/ferramentas/bbfca487292a63aa277ac90010663bf0.png', 1, './assets/qrcodes/ferramentas/9.png', 0);
+(10, 'FERRAMENTA TESTE', '/assets/images/ferramentas/bb3c59e3d5b253edb8cb9c8773ba2f76.png', 1, './assets/qrcodes/ferramentas/10.png', 2),
+(11, 'teste 2', '', 0, './assets/qrcodes/ferramentas/11.png', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `log`
+--
+
+CREATE TABLE `log` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `ferramenta_id` int(11) NOT NULL,
+  `calibragem` int(11) NOT NULL,
+  `armazenamento_id` int(11) DEFAULT NULL,
+  `acao` varchar(10) NOT NULL,
+  `timestamp` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Extraindo dados da tabela `log`
+--
+
+INSERT INTO `log` (`id`, `usuario_id`, `ferramenta_id`, `calibragem`, `armazenamento_id`, `acao`, `timestamp`) VALUES
+(14, 6, 11, 1, 5, 'colocado', '2024-05-24 11:56:59'),
+(15, 6, 11, 1, 0, 'retirado', '2024-05-24 11:57:01'),
+(16, 6, 11, 0, 6, 'colocado', '2024-05-24 11:57:12'),
+(17, 6, 11, 0, 0, 'retirado', '2024-05-24 11:57:13');
 
 -- --------------------------------------------------------
 
@@ -86,8 +111,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`) VALUES
-(2, '(TESTE)', 'teste@teste.com', 'aa1bf4646de67fd9086cf6c79007026c'),
-(5, 'teste', 'teste2@teste.com', 'd41d8cd98f00b204e9800998ecf8427e');
+(6, 'TESTE', 'teste@teste.com', 'aa1bf4646de67fd9086cf6c79007026c');
 
 --
 -- Índices para tabelas despejadas
@@ -106,6 +130,12 @@ ALTER TABLE `ferramenta`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `log`
+--
+ALTER TABLE `log`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `usuario`
 --
 ALTER TABLE `usuario`
@@ -119,19 +149,25 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `armazenamento`
 --
 ALTER TABLE `armazenamento`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `ferramenta`
 --
 ALTER TABLE `ferramenta`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de tabela `log`
+--
+ALTER TABLE `log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

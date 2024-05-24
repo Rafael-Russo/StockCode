@@ -23,7 +23,7 @@
             <p class="text-uppercase bg-light p-2 mt-0 mb-3 font-weight-bold">Informações da Ferramenta</p>
 
             <div class="form-group mb-3">
-                <img src="<?= ($ferramenta['qr_code']) ? base_url($ferramenta['qr_code']) : ''; ?>" class="img-fluid d-block mx-auto mb-3" style="max-width: 50%;" />
+                <img src="<?= ($ferramenta['img']) ? base_url($ferramenta['img']) : base_url('/assets/images/ferramentas/1.png'); ?>" class="img-fluid d-block mx-auto mb-3" style="max-width: 50%;" />
             </div>
 
             <div class="form-group mb-3">
@@ -52,13 +52,56 @@
                     <?php endif; ?>
                 </div>
             </div>
-
-
         </div> <!-- end card-box -->
     </div> <!-- end col -->
 </div> <!-- end row -->
+
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+        <div class="card-box">
+            <p class="text-uppercase bg-light p-2 mt-0 mb-3 font-weight-bold">Histórico de Atividades</p>
+            <?php
+            if (!$logs) {
+            ?>
+                <p class="text-uppercase p-2 mt-0 mb-3">Nenhum Histórico Disponível</p>
+            <?php
+            } else {
+            ?>
+                <div class="table-responsive">
+                    <table id="demo-foo-filtering" class="table table-bordered toggle-circle mb-0" data-page-size="7">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Usuário</th>
+                                <th>Calibragem</th>
+                                <th>Armazém</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($logs as $log) : ?>
+                                <tr>
+                                    <td><?= date('d/m/Y H:i:s', strtotime($log['timestamp'])); ?></td>
+                                    <td><?= $log['usuario_nome']; ?></td> <!-- Usando o nome do usuário -->
+                                    <td><?= $log['calibragem'] ? 'Calibrado' : 'Descalibrado'; ?></td>
+                                    <td><?= $log['armazem_nome'] ? $log['armazem_nome'] : 'Nenhum'; ?></td> <!-- Usando o nome do armazém -->
+                                    <td><?= $log['acao']; ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div> <!-- end table-responsive -->
+            <?php
+            }
+            ?>
+        </div> <!-- end card-box -->
+    </div> <!-- end col -->
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    var isRequestPending = false;
+
     $(document).ready(function() {
         $('.btn-success').click(function() {
             atualizarCalibragem(0); // Define como descalibrado
@@ -79,20 +122,26 @@
     });
 
     function atualizarCalibragem(valor) {
-        $.post('<?= site_url('ferramenta/atualizar_calibragem') ?>', { 
-            ferramenta_id: '<?= $ferramenta['id']; ?>', 
-            calibragem: valor 
+        $.post('<?= site_url('ferramenta/atualizar_calibragem') ?>', {
+            ferramenta_id: '<?= $ferramenta['id']; ?>',
+            calibragem: valor
         }, function(data) {
             location.reload(); // Recarrega a página para refletir a mudança
         });
     }
 
     function retirarFerramenta() {
+        if (isRequestPending) return;
+        isRequestPending = true;
+        console.log("Chamada para retirar ferramenta"); // Adicionar log para diagnosticar
+
         $.post('<?= site_url('ferramenta/atualizar_armazenamento') ?>', {
             ferramenta_id: '<?= $ferramenta['id']; ?>',
             armazenamento: 0
         }, function(data) {
             location.reload();
+        }).always(function() {
+            isRequestPending = false; // Resetar flag após a requisição
         });
     }
 

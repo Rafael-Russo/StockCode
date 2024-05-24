@@ -37,8 +37,13 @@
                             <?php foreach ($armazenamentos as $a) { ?>
                                 <tr>
                                     <td style="text-transform: uppercase"><?php echo $a['nome']; ?></td>
-                                    <td><img src="<?php echo base_url($a['qr_code']); ?>" alt="" height="40"></td>
                                     <td>
+                                        <a href="<?php echo base_url($a['qr_code']); ?>" download>
+                                            <img src="<?php echo base_url($a['qr_code']); ?>" alt="" height="40">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="<?php echo site_url('armazenamento/view/' . $a['id']); ?>" class="btn btn-warning btn-xs"><i class="fa fa-solid fa-eye"></i></a>
                                         <a href="<?php echo site_url('armazenamento/editar/' . $a['id']); ?>" class="btn btn-info btn-xs"><i class="fa fa-pen"></i></a>
                                         <a href="<?php echo site_url('armazenamento/remove/' . $a['id']); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
                                     </td>

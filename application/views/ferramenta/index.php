@@ -48,7 +48,11 @@
                                 <tr>
                                     <td style="text-transform: uppercase"><?php echo $f['id']; ?></td>
                                     <td style="text-transform: uppercase"><?php echo $f['nome']; ?></td>
-                                    <td><img src="<?php echo base_url($f['qr_code']); ?>" alt="" height="40"></td>
+                                    <td>
+                                        <a href="<?php echo base_url($f['qr_code']); ?>" download>
+                                            <img src="<?php echo base_url($f['qr_code']); ?>" alt="" height="40">
+                                        </a>
+                                    </td>
                                     <td>
                                         <?php echo ($f['calibragem'] == 1) ? "<span class='badge label-table badge-success'  style='padding-top:5px;'>CALIBRADO</span>" : "<span class='badge label-table badge-danger' style='padding-top:5px;'>DESCALIBRADO</span>"; ?>
                                     </td>

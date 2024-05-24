@@ -1,94 +1,5 @@
 <link href="<?php echo base_url(); ?>assets/libs/dropzone/dropzone.min.css" rel="stylesheet" type="text/css" />
 
-
-<style id="compiled-css" type="text/css">
-    .img-thumbnail {
-        width: 100%;
-        height: 40px;
-        object-fit: cover;
-        object-position: center;
-        margin: 0px;
-        float: left
-    }
-
-    @media(max-width: 480px) {
-        .img-thumbnail {
-            height: 50px;
-        }
-    }
-
-    div.browse-wrap {
-        width: 250px;
-        margin: 0 auto;
-        cursor: pointer;
-        overflow: hidden;
-        padding: 10px 20px 10px 20px;
-        text-align: center;
-        position: relative;
-        background-color: #f6f7f8;
-        border: solid 1px #d2d2d7;
-    }
-
-    div.browse-wrap2 {
-        top: 0;
-        left: 0;
-        width: 60px;
-        height: 60px;
-        float: left;
-        margin-top: -10px;
-        cursor: pointer;
-        overflow: hidden;
-        padding: 10px 10px;
-        text-align: center;
-        position: relative;
-        background-color: #3fb2c8;
-        color: #fff;
-        border-radius: 10px;
-    }
-
-    div.title {
-        color: #3b5998;
-        font-size: 14px;
-        font-weight: bold;
-        font-family: tahoma, arial, sans-serif;
-    }
-
-    input.upload {
-        right: 0;
-        margin: 0;
-        bottom: 0;
-        padding: 0;
-        opacity: 0;
-        height: 300px;
-        outline: none;
-        cursor: inherit;
-        position: absolute;
-        font-size: 1000px !important;
-    }
-
-    input.upload2 {
-        right: 0;
-        margin: 0;
-        bottom: 0;
-        padding: 0;
-        opacity: 0;
-        height: 300px;
-        outline: none;
-        cursor: inherit;
-        position: absolute;
-        font-size: 1000px !important;
-    }
-
-    span.upload-path {
-        text-align: center;
-        margin: 0px;
-        display: block;
-        font-size: 80%;
-        color: #3b5998;
-        font-weight: bold;
-        font-family: tahoma, arial, sans-serif;
-    }
-</style>
 <!-- start page title -->
 <div class="row">
     <div class="col-12">
@@ -117,9 +28,20 @@
                 </div>
                 <div class="form-group mb-3">
                     <label>QR Code <span class="text-danger">*</span></label>
-                    <input type="text" name="qrcode" value="<?php echo $armazenamento['qr_code']; ?>" class="form-control" id="qrcode" />
+                    <input type="hidden" name="qrcode" id="qrcode" value="" />
+                    <a href="<?php echo base_url($armazenamento['qr_code']); ?>" download>
+                        <img id="qrcodePreview" src="<?= ($armazenamento['qr_code']) ? base_url($armazenamento['qr_code']) : ''; ?>" class="img-fluid d-block mx-auto" style="max-width: 50%; display: none;" />
+                    </a>
                 </div>
             </div> <!-- end card-box -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-right mb-3">
+                        <input type="submit" class="btn  w-sm btn-success waves-effect waves-light" value="PROSSEGUIR" />
+                    </div>
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
         </div> <!-- end col -->
         <div class="col-lg-6">
             <div class="card-box">
@@ -160,15 +82,6 @@
         </div> <!-- end col -->
     </div>
     <!-- end row -->
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6">
-            <div class="text-right mb-3">
-                <input type="submit" class="btn  w-sm btn-success waves-effect waves-light" value="PROSSEGUIR" />
-            </div>
-        </div> <!-- end col -->
-    </div>
-    <!-- end row -->
 
 </form>
 <script type="text/javascript">
@@ -180,4 +93,13 @@
             });
         });
     });
+
+    function updateQRCodePreview(qrCodeUrl) {
+        const qrcodeInput = document.getElementById('qrcode');
+        const qrcodePreview = document.getElementById('qrcodePreview');
+
+        qrcodeInput.value = qrCodeUrl;
+        qrcodePreview.src = qrCodeUrl;
+        qrcodePreview.style.display = 'block';
+    }
 </script>
